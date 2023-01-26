@@ -1,0 +1,37 @@
+using System;
+
+class Node {
+    
+   public int data;
+   public Node next ;
+    
+  public  Node(int data){
+        this.data = data;
+    }
+}
+class linkelist{
+ public static void Main() {
+    Console.WriteLine("Hello World");
+      Node n1 = new Node(10);
+    Node n2 = new Node(20);
+    Node n3 = new Node(40);
+    Node head = n1;
+    head.next = n2;
+    n2.next = n3;
+    n3.next = null;
+    
+    traverse(head);
+  
+  }
+  
+ static void  traverse(Node head)
+  {
+      Node curr = head ;
+      
+      while(curr !=null){
+          Console.WriteLine(curr.data);
+          curr= curr.next;
+          
+      }
+  }
+  }
