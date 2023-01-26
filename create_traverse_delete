@@ -1,0 +1,155 @@
+using System;
+
+class Node {
+    
+   public int data;
+   public Node next ;
+    
+  public  Node(int data){
+        this.data = data;
+    }
+}
+class linkelist{
+ public static void Main() {
+    
+    Node n1 = new Node(10);
+    Node n2 = new Node(20);
+    Node n3 = new Node(40);
+    Node head = n1;
+    head.next = n2;
+    n2.next = n3;
+    n3.next = null;
+    
+ head = insert_front(89, head);
+    
+ head = insert_pos(7800, head,4);
+    traverse(head);
+    Console.WriteLine("delete started...");
+    head = deleteList(89,head);
+    Console.WriteLine("after delete...");
+    traverse(head);
+  }
+  
+  
+  
+   static Node deleteList(int data, Node head ){
+      
+      Node curr = head;
+      Node temp;
+      
+      if(head.data == data){
+          
+          if(head.next == null){
+              head= null;
+          }
+          else
+          {
+          temp = head.next;
+          head = temp;
+          }
+          
+          return head;
+      }
+      Console.WriteLine("inside delete");
+      Node prev = head;  curr= head.next;
+      while(curr != null)
+     {
+         if(curr.next == null && curr.data == data )
+         {
+             prev.next = null;
+             return head;
+         }
+         if(curr.data == data ){
+             Console.WriteLine("data found");
+             temp = curr;
+             prev.next = temp.next;
+             curr= prev.next;
+             return head;
+         } 
+          curr= curr.next;
+          prev= prev.next;
+     }
+    return head;
+  }
+  
+  
+  
+  
+  static Node insert_pos(int data , Node head , int pos)
+  {
+      Node  newnode = new Node(data);
+      Node prev = head; Node nodeAtPos ;
+      
+      if(pos ==0 ){
+          head = insert_front(data , head);
+          return head;
+      }
+      
+      for(int i = 0 ; i< pos-1; i++) {
+          
+          if(head == null)
+          {
+              newnode = head;
+              newnode.next= null;
+          }
+          
+            if(prev.next == null){
+             head = insert_end(data, head);
+             return head;
+            }
+            
+          prev = prev.next;
+      }
+      
+      Node temp = prev;
+      Node curr = temp.next;
+      
+      prev.next= newnode;
+      newnode.next = curr;
+      
+      return head;
+      
+  }
+  
+  
+  static Node insert_end(int data , Node head){
+      
+      Node newnode = new Node(data);
+      Node temp = head;
+      
+      while(temp!= null){
+          temp = temp.next;
+      }
+      
+      temp.next= newnode;
+      newnode.next= null;
+      return head;
+  }
+  
+  
+  static Node insert_front(int data , Node head){
+      Console.WriteLine("Hello World");
+      Node newnode = new Node(data);
+      Node temp= head;
+      newnode.next= temp;
+      head = newnode;
+     
+      traverse (head);
+      Console.WriteLine("after insert first ..");
+      return head;
+  }
+  
+  
+ 
+ 
+ 
+  static void  traverse(Node head)
+  {
+      Node curr = head ;
+      
+      while(curr!=null){
+          Console.WriteLine(curr.data);
+          curr= curr.next;
+      }
+  }
+}
